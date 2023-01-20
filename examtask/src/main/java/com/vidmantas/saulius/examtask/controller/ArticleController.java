@@ -71,7 +71,7 @@ public class ArticleController {
     private static final Comparator<ArticleEntity> sortEntitiesByDate = new Comparator<ArticleEntity>() {
         @Override
         public int compare(ArticleEntity o1, ArticleEntity o2) {
-            return o1.getPublishDate().compareTo(o2.getPublishDate());
+            return o2.getPublishDate().compareTo(o1.getPublishDate());
         }
     };
 
