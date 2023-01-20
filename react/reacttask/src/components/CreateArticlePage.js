@@ -26,34 +26,36 @@ export function CreateArticlePage() {
 
     return (
         <table id="create-article">
-            <tr id="create-header">
-                <th>Naujas įrašas</th>
-            </tr>
-            <tr>
-                <th>Antraštė</th>
-            </tr>
-            <tr>
-                <td>
-                    <input type="text" id="name" value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    ></input>
-                </td>
-            </tr>
-            <tr>
-                <th>Tekstas</th>
-            </tr>
-            <tr>
-                <td>
-                    <input type="text" id="description" value={description}
-                    onChange={(e) => setDescription(e.target.value)}
-                    ></input>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <button onClick={CreateArticle}>Publikuoti</button>
-                </td>
-            </tr>
+            <tbody>
+                <tr id="create-header">
+                    <th>Naujas įrašas</th>
+                </tr>
+                <tr>
+                    <th>Antraštė</th>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="text" id="name" value={name}
+                        onChange={(e) => setName(e.target.value)}
+                        ></input>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Tekstas</th>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="text" id="description" value={description}
+                        onChange={(e) => setDescription(e.target.value)}
+                        ></input>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <button onClick={CreateArticle}>Publikuoti</button>
+                    </td>
+                </tr>
+            </tbody>
         </table>
     )
 }

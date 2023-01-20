@@ -11,12 +11,14 @@ export function Menu(props) {
     }
 
     return (
-       <tbody>
+        <tr>
+            <td>
         <a id="link-viewarticles" href="#" onClick={(e) => 
             notifyActiveChange("CreateArticle")}> Rašyti naują</a>
 
         <a id="link-viewarticles" href="#" onClick={(e) => 
             notifyActiveChange("ViewArticles")}> Žiūrėti straipsnius</a>
-        </tbody>
+            </td>
+        </tr>
         )
 }

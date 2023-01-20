@@ -58,6 +58,8 @@ public class ArticleController {
 
             if (!foundArticleEntity.isPresent()) {
                 articleEntity.setCurrentPublishDate();
+                List<Comment> comments = List.of(new Comment("asd", "asdf"));
+                articleEntity.setComments(comments);
                 articleDataBase.save(articleEntity);
             }
             else {
@@ -96,11 +98,11 @@ public class ArticleController {
     }
 
     @GetMapping("/article-comments/{articleID}")
-    public ArrayList<String> getComments (@PathVariable String articleID) {
+    public List<Comment> getComments (@PathVariable String articleID) {
         System.out.println(articleID + " comment getting article ID");
         Long longID = Long.valueOf(articleID);
 
-        ArrayList<String> gettingComments = articleDataBase.findById(longID).get().getComments();
+        List<Comment> gettingComments = articleDataBase.findById(longID).get().getComments();
         if (!gettingComments.isEmpty()) {
             return gettingComments;
         }
@@ -108,7 +110,10 @@ public class ArticleController {
     }
 
     @PostMapping("/article_comments/{articleID}")
-    public void addComment (@PathVariable Comment commentForPost) {
-        System.out.println("Posting comment " + commentForPost.getCommentName() + " " + commentForPost.getCommentDescription());
+    public void addComment (@RequestBody Comment commentForPost, @PathVariable String articleID) {
+        System.out.println(articleID + " comment getting article ID");
+        Long longID = Long.valueOf(articleID);
+        
+        articleDataBase.findById()
     }
 }

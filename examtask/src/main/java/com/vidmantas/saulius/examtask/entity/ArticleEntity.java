@@ -6,6 +6,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -19,23 +20,25 @@ public class ArticleEntity {
     private String description;
 
     private String publishDate;
-    private ArrayList<String> comments;
+
+    @OneToMany(mappedBy = "articleEntity")
+    private List<Comment> comments;
 
     public ArticleEntity() {
     }
 
-    public ArticleEntity(String name, String description, ArrayList<String> comments) {
+    public ArticleEntity(String name, String description, List<Comment> comments) {
         this.name = name;
         this.description = description;
         this.comments = comments;
         setCurrentPublishDate();
     }
 
-    public ArrayList<String> getComments() {
+    public List<Comment> getComments() {
         return comments;
     }
 
-    public void setComments(ArrayList<String> comments) {
+    public void setComments(List<Comment> comments) {
         this.comments = comments;
     }
 

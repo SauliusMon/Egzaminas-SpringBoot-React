@@ -44,51 +44,65 @@ export function ArticleReadMore(props) {
 
     return (
     <table>
-        <tr>
-            <th>Sup bruh</th>
-            <th>{currentArticleId}</th>
-        </tr>
-        <tr>
-            <th id="article-name">{article.name}</th>
-        </tr>
-        <tr>
-            <td id="article-date">{article.publishDate}</td>
-        </tr>
-        <tr>
-            <td id="article-description">{article.description}</td>
-        </tr>
-        <tr>
-            <th>Palikti komentarą</th>
-        </tr>
-        <tr>
-            <td>Autorius</td>
-            <td>
-                {/* <input type="text" id="commentName" value={commentName}
-                onChange={(e) => setCommentName(e.target.value)}
-                ></input> */}
-            </td>
-        </tr>
-        <tr>
-            <td>Komentaras</td>
-            <td>
-            {/* <input type="text" id="commentDescription" value={commentDescription}
-                onChange={(e) => setCommentDescription(e.target.value)}
-            ></input> */}
-            </td>
-        </tr>
-        <tr>
-            {/* <button onClick={CreateComment}>Komentuoti</button> */}
-        </tr>
-        <tr>
-            <th>Komentarai</th>
-        </tr>
-        <tr> 
-            <article>Comment</article>
-            {comments.map(comment => (
-            <table id="comment">
-                <td>{comment} Comment</td>
-            </table>
-            ))}
-        </tr>
+        <thead>
+            <tr>
+                <th id="article-name">{article.name}</th>
+            </tr>
+            <tr>
+                <td id="article-date">{article.publishDate}</td>
+            </tr>
+            <tr>
+                <td id="article-description">{article.description}</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th>Palikti komentarą</th>
+            </tr>
+            <tr>
+                <td>Autorius</td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="text" id="commentName" value={commentName}
+                    onChange={(e) => setCommentName(e.target.value)}
+                    ></input>
+                </td>
+            </tr>
+            <tr>
+                <td>Komentaras</td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="text" id="commentDescription" value={commentDescription}
+                        onChange={(e) => setCommentDescription(e.target.value)}
+                    ></input>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <button onClick={CreateComment}>Komentuoti</button>
+                </td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <th>Komentarai</th>
+            </tr>
+            <tr> 
+                <td>Comment</td>
+                {comments !== undefined && comments !== null ?
+                    comments.map(comment => (
+                    <td id="comment">
+                        <td>{comment} Comment</td>
+                    </td>
+                    )) 
+                    : 
+                    <tr>
+                        <td>No new comments</td>
+                    </tr>
+                }
+            </tr>
+        </tfoot>
     </table>)
 }

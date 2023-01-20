@@ -22,42 +22,16 @@ function App() {
     else {
       return (<ViewArticles active={page} onChange={setPage}/>)
     }
-  
-    // switch(page) {
-    //   case "CreateArticle":
-    //     return (<CreateArticlePage/>)
-    //   case "ReadMore//d":
-    //     console.log(articleID + "supp")
-    //     return (<ArticleReadMore setArticleID={articleID}/>)
-    //   default:
-    //     console.log(page + "supp")
-    //       return (<ViewArticles active={page} onChange={setPage}/>)
-    // }
   }
 
 
   return (
     <div className="App">
-      Main page:
+      <h1>Main page:</h1>
       <Menu active={page} onChange={setPage}/>
       {renderPage(page, articleID)}
     </div>
   );
 }
-
-// <header className="App-header">
-//         <img src={logo} className="App-logo" alt="logo" />
-//         <p>
-//           Edit <code>src/App.js</code> and save to reload.
-//         </p>
-//         <a
-//           className="App-link"
-//           href="https://reactjs.org"
-//           target="_blank"
-//           rel="noopener noreferrer"
-//         >
-//           Learn React
-//         </a>
-//       </header>
 
 export default App;

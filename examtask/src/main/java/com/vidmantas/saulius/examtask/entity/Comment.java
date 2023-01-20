@@ -14,6 +14,11 @@ public class Comment {
     private String commentName;
     private String commentDescription;
 
+
+    @ManyToOne
+    @JoinColumn(name = "parent_entity_id")
+    private ArticleEntity articleEntity;
+
     public Comment() {
     }
 

@@ -19,28 +19,32 @@ export function ViewArticles(props) {
     }, []);
 
     
-    return (<tbody>
-        {articles.map(article => (
-            <table id="article">
-                <tr>
-                    <th id="article-name">{article.name}</th>
-                </tr>
-                <tr>
-                    <td id="article-date">{article.publishDate}</td>
-                </tr>
-                <tr>
-                    <td id="article-description">{article.description}</td>
-                </tr>
-                <tr>
-                    <a id="link-viewmore" href="#" onClick={(e) => 
-                        notifyActiveChange("ReadMore", article.id)}> Skaityti daugiau</a>
-                </tr>
-            </table>
-
-            //  <tr key={article.id}>
-            //      <th>{article.name}</th>
-            //      <td>{article.description}</td>
-            //  </tr>
-         ))}
-         </tbody>)
+    return (<table> 
+            {articles.length !== 0 ?
+                articles.map(article => (
+                    <tbody id="article">
+                        <tr>
+                            <th id="article-name">{article.name}</th>
+                        </tr>
+                        <tr>
+                            <td id="article-date">{article.publishDate}</td>
+                        </tr>
+                        <tr>
+                            <td id="article-description">{article.description}</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <a id="link-viewmore" href="#" onClick={(e) => 
+                                    notifyActiveChange("ReadMore", article.id)}> Skaityti daugiau</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                )) :
+            <tr>
+                <td id="article-name">No articles</td>
+            </tr>
+        }
+        
+         </table>
+    )
 }
