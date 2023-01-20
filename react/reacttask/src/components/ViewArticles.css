@@ -1,0 +1,20 @@
+#article-name {
+    font-size: 24px;
+    padding-bottom: 20px;
+}
+
+#article-date {
+    font-style: italic;
+    padding-bottom: 25px;
+}
+
+#article-description {
+    font-size: 0.9rem;
+    padding-bottom: 30px;
+}
+
+#article-name, #article-date, #article-description {
+    padding-left: 5rem;
+    text-align: start;
+}
+
