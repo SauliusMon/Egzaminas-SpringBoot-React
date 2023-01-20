@@ -1,0 +1,12 @@
+#create-article{
+    padding-left: 5rem;
+}
+
+#create-article td, th{
+    text-align: start;
+    padding: 0.5rem;
+}
+
+#create-header {
+    font-size: 2rem;
+}
