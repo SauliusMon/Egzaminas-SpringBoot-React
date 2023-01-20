@@ -21,8 +21,8 @@ public class ArticleEntity {
 
     private String publishDate;
 
-    @OneToMany(mappedBy = "articleEntity")
-    private List<Comment> comments;
+    @OneToMany(mappedBy = "articleEntity", cascade = CascadeType.PERSIST)
+    private List<Comment> comments = new ArrayList<>();
 
     public ArticleEntity() {
     }
@@ -40,6 +40,10 @@ public class ArticleEntity {
 
     public void setComments(List<Comment> comments) {
         this.comments = comments;
+    }
+
+    public void addComment(Comment comment) {
+        this.comments.add(comment);
     }
 
     public void setCurrentPublishDate() {

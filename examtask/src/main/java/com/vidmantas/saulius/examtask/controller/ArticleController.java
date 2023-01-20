@@ -8,6 +8,7 @@ import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.web.bind.annotation.*;
 
+import javax.swing.text.html.Option;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -58,8 +59,7 @@ public class ArticleController {
 
             if (!foundArticleEntity.isPresent()) {
                 articleEntity.setCurrentPublishDate();
-                List<Comment> comments = List.of(new Comment("asd", "asdf"));
-                articleEntity.setComments(comments);
+
                 articleDataBase.save(articleEntity);
             }
             else {
@@ -101,7 +101,6 @@ public class ArticleController {
     public List<Comment> getComments (@PathVariable String articleID) {
         System.out.println(articleID + " comment getting article ID");
         Long longID = Long.valueOf(articleID);
-
         List<Comment> gettingComments = articleDataBase.findById(longID).get().getComments();
         if (!gettingComments.isEmpty()) {
             return gettingComments;
@@ -113,7 +112,10 @@ public class ArticleController {
     public void addComment (@RequestBody Comment commentForPost, @PathVariable String articleID) {
         System.out.println(articleID + " comment getting article ID");
         Long longID = Long.valueOf(articleID);
-        
-        articleDataBase.findById()
+
+        Optional<ArticleEntity> articleEntity = articleDataBase.findById(longID).stream().findFirst();
+        if (articleEntity.isPresent()) {
+            articleEntity.get().addComment(commentForPost);
+        }
     }
 }
