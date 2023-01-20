@@ -1,15 +1,18 @@
 package com.vidmantas.saulius.examtask.controller;
 
 
-import com.vidmantas.saulius.examtask.ExamtaskApplication;
 import com.vidmantas.saulius.examtask.dao.ArticleDao;
 import com.vidmantas.saulius.examtask.entity.ArticleEntity;
+import com.vidmantas.saulius.examtask.entity.Comment;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 
 @CrossOrigin//("http://localhost:8080")
@@ -31,7 +34,6 @@ public class ArticleController {
 
     @GetMapping("/post-article")
     public void mappingPostArticle() {
-        //System.out.println("Posting stuff");
         articleDataBase.save(new ArticleEntity("Name", "Good description", null));
     }
 
@@ -57,7 +59,6 @@ public class ArticleController {
             if (!foundArticleEntity.isPresent()) {
                 articleEntity.setCurrentPublishDate();
                 articleDataBase.save(articleEntity);
-                System.out.println("Saving entity " + articleDataBase.findAll().size());
             }
             else {
                 System.out.println("Already present entity " + articleDataBase.findAll().size());
@@ -65,21 +66,20 @@ public class ArticleController {
         }
     }
 
-    @GetMapping("/delete-article")
-    public void deleteArticle() {
-        System.out.println("Deleting stuff");
-        articleDataBase.deleteById(1L);
-    }
+    private static final Comparator<ArticleEntity> sortEntitiesByDate = new Comparator<ArticleEntity>() {
+        @Override
+        public int compare(ArticleEntity o1, ArticleEntity o2) {
+            return o1.getPublishDate().compareTo(o2.getPublishDate());
+        }
+    };
 
     @GetMapping("/get-articles")
     public List<ArticleEntity> getArticles() {
-       //System.out.println("Getting articles");
-        return articleDataBase.findAll();
+        return articleDataBase.findAll().stream().sorted(sortEntitiesByDate).collect(Collectors.toList());
     }
 
     @GetMapping("/get-article/{articleID}")
     public ArticleEntity getArticleEntity(@PathVariable String articleID) {
-
         System.out.println(articleID + " getting article ID");
         Long longID = Long.valueOf(articleID);
 
@@ -88,12 +88,27 @@ public class ArticleController {
                 .findFirst();
 
         if (foundArticleEntity.isPresent()) {
-            System.out.println("Entity is present" + articleDataBase.findAll().size());
             return foundArticleEntity.get();
         }
         else {
-            System.out.println("Entity is not present" + articleDataBase.findAll().size());
             return null;
         }
+    }
+
+    @GetMapping("/article-comments/{articleID}")
+    public ArrayList<String> getComments (@PathVariable String articleID) {
+        System.out.println(articleID + " comment getting article ID");
+        Long longID = Long.valueOf(articleID);
+
+        ArrayList<String> gettingComments = articleDataBase.findById(longID).get().getComments();
+        if (!gettingComments.isEmpty()) {
+            return gettingComments;
+        }
+        return null;
+    }
+
+    @PostMapping("/article_comments/{articleID}")
+    public void addComment (@PathVariable Comment commentForPost) {
+        System.out.println("Posting comment " + commentForPost.getCommentName() + " " + commentForPost.getCommentDescription());
     }
 }

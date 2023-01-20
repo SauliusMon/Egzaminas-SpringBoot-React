@@ -21,8 +21,6 @@ public class ArticleEntity {
     private String publishDate;
     private ArrayList<String> comments;
 
-
-
     public ArticleEntity() {
     }
 
@@ -31,6 +29,14 @@ public class ArticleEntity {
         this.description = description;
         this.comments = comments;
         setCurrentPublishDate();
+    }
+
+    public ArrayList<String> getComments() {
+        return comments;
+    }
+
+    public void setComments(ArrayList<String> comments) {
+        this.comments = comments;
     }
 
     public void setCurrentPublishDate() {
@@ -72,10 +78,6 @@ public class ArticleEntity {
         this.description = description;
     }
 
-    public void setComments(ArrayList<String> comments) {
-        this.comments = comments;
-    }
-
     public Long getId() {
         return id;
     }
@@ -86,9 +88,5 @@ public class ArticleEntity {
 
     public String getDescription() {
         return description;
-    }
-
-    public ArrayList<String> getComments() {
-        return comments;
     }
 }

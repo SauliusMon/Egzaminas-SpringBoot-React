@@ -3,7 +3,10 @@ import { useEffect, useState } from 'react';
 export function ArticleReadMore(props) {
 
     const [article, setArticle] = useState([]);
-    const [comments, getComments] = useState([])
+    const [comments, setComments] = useState([])
+
+    const [commentName, setCommentName] = useState("");
+    const [commentDescription, setCommentDescription] = useState("")
 
     const setArticleID = ((articleID) => { 
         currentArticleId = articleID
@@ -12,7 +15,7 @@ export function ArticleReadMore(props) {
     //On init sets article ID
     useEffect(() => {
         setArticleID(props.articleID)
-        getComments(article.comments)
+        setComments(article.comments)
     })
     var currentArticleId;
 
@@ -23,8 +26,24 @@ export function ArticleReadMore(props) {
             .then(setArticle)
     }, [currentArticleId]);
 
+    const CreateComment = () =>  {
+        fetch(
+            `/api/v1/article_comments/${currentArticleId}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    commentName,
+                    commentDescription,
+                    registered: false
+                })
+            }
+        )
+    };
 
-    return (<table>
+    return (
+    <table>
         <tr>
             <th>Sup bruh</th>
             <th>{currentArticleId}</th>
@@ -42,7 +61,23 @@ export function ArticleReadMore(props) {
             <th>Palikti komentarą</th>
         </tr>
         <tr>
-             <td></td>
+            <td>Autorius</td>
+            <td>
+                {/* <input type="text" id="commentName" value={commentName}
+                onChange={(e) => setCommentName(e.target.value)}
+                ></input> */}
+            </td>
+        </tr>
+        <tr>
+            <td>Komentaras</td>
+            <td>
+            {/* <input type="text" id="commentDescription" value={commentDescription}
+                onChange={(e) => setCommentDescription(e.target.value)}
+            ></input> */}
+            </td>
+        </tr>
+        <tr>
+            {/* <button onClick={CreateComment}>Komentuoti</button> */}
         </tr>
         <tr>
             <th>Komentarai</th>
@@ -55,6 +90,5 @@ export function ArticleReadMore(props) {
             </table>
             ))}
         </tr>
-
     </table>)
 }
